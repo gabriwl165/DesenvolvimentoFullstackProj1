@@ -10,6 +10,13 @@
     align-items: center;
 }
 
+.bannerText{
+    position: absolute;
+    justify-content: left;
+    margin-right: 30%;
+    margin-left: 5%;
+}
+
 .container img {
     width: 100%;
     height: 100%;
@@ -28,22 +35,16 @@
 }
 
 .mainText {
-    position: absolute;
     color: white;
     z-index: 2;
     font-family: "Alex Brush", cursive;
     font-size: 60px;
-    top: 30%;
-    left: 1%;
 }
 
 .secondText {
-    position: absolute;
     color: white;
     z-index: 2;
     font-family: "Alex Brush", cursive;
     font-size: 30px;
-    left: 1%;
-
 
 }
