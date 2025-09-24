@@ -91,15 +91,13 @@ function SearchPets() {
                         key={pet.id || idx}
                         image={getImageUrl(pet)}
                         title={pet.name}
-                        subtitle={pet.breed_group || pet.origin}
-                        description={
-                            pet.description
-                                ? pet.description.length > 100
-                                    ? pet.description.slice(0, 100) + "..."
-                                    : pet.description
-                                : ""
-                        }
+                        subtitle={pet.breed_group}
+                        description={pet.bred_for}
+                        temperament={pet.temperament}
                         lifeSpan={pet.life_span}
+                        origin={pet.origin}
+                        weight={pet.weight}
+                        height={pet.height}
                         species={species}
                     />
                 ))}

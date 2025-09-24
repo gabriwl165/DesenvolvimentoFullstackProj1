@@ -2,13 +2,24 @@ import React from "react";
 import styles from "./Card.module.css";
 
 function capitalizeFirstLetter(str) {
-    if (typeof str !== 'string' || str.length === 0) {
+    if (typeof str !== "string" || str.length === 0) {
         return str;
     }
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function Card({ image, title, subtitle, description, lifeSpan, species }) {
+function Card({
+                  image,
+                  title,          // name
+                  subtitle,       // breed_group
+                  description,    // bred_for
+                  temperament,
+                  lifeSpan,       // life_span
+                  origin,
+                  weight,         // { imperial, metric }
+                  height,         // { imperial, metric }
+                  species,
+              }) {
     return (
         <div className={styles.floatingCard}>
             {image && (
@@ -16,13 +27,53 @@ function Card({ image, title, subtitle, description, lifeSpan, species }) {
             )}
             <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{title}</h3>
-                <h4 className={styles.cardSubtitle}>{subtitle}</h4>
-                <p className={styles.cardDescription}>{description}</p>
-                {lifeSpan && (
-                    <p className={styles.cardLifeSpan}><strong>Life Expectancy:</strong> {lifeSpan}</p>
+
+                {subtitle && (
+                    <h4 className={styles.cardSubtitle}>
+                        <strong>Group:</strong> {subtitle}
+                    </h4>
                 )}
+
+                {description && (
+                    <p className={styles.cardDescription}>
+                        <strong>Bred for:</strong> {description}
+                    </p>
+                )}
+
+                {temperament && (
+                    <p className={styles.cardTemperament}>
+                        <strong>Temperament:</strong> {temperament}
+                    </p>
+                )}
+
+                {origin && (
+                    <p className={styles.cardOrigin}>
+                        <strong>Origin:</strong> {origin}
+                    </p>
+                )}
+
+                {lifeSpan && (
+                    <p className={styles.cardLifeSpan}>
+                        <strong>Life Expectancy:</strong> {lifeSpan}
+                    </p>
+                )}
+
+                {weight && (
+                    <p className={styles.cardWeight}>
+                        <strong>Weight:</strong> {weight.metric} kg ({weight.imperial} lbs)
+                    </p>
+                )}
+
+                {height && (
+                    <p className={styles.cardHeight}>
+                        <strong>Height:</strong> {height.metric} cm ({height.imperial} in)
+                    </p>
+                )}
+
                 {species && (
-                    <span className={styles.cardSpecies}>{capitalizeFirstLetter(species)}</span>
+                    <span className={styles.cardSpecies}>
+                        {capitalizeFirstLetter(species)}
+                    </span>
                 )}
             </div>
         </div>
