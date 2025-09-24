@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchPets.module.css";
+import Card from "../Card/Card.jsx";
 
 
 function SearchPets() {
@@ -19,6 +20,7 @@ function SearchPets() {
     }, [searchResults]);
 
     const handleSearch = async () => {
+        setPopupMessage("");
         if (!searchValue) {
             setPopupMessage("Type a breed!");
             setShowPopup(true);
@@ -44,7 +46,6 @@ function SearchPets() {
             } else {
                 setSearchResults(data);
             }
-            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             setPopupMessage("Error when finding. Try again!");
             setShowPopup(true);
@@ -89,30 +90,23 @@ function SearchPets() {
                 <div className="alert alert-warning mt-2">{popupMessage}</div>
             )}
 
-            <div className="d-flex flex-wrap gap-3 mt-3">
-                {searchResults.map((pet) => (
-                    <Card key={pet.id} style={{ width: "18rem" }}>
-                        {getImageUrl(pet) && (
-                            <Card.Img
-                                variant="top"
-                                src={getImageUrl(pet)}
-                                alt={pet.name}
-                                style={{ height: "200px", objectFit: "cover" }}
-                            />
-                        )}
-                        <Card.Body>
-                            <Card.Title>{pet.name}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">
-                                {species === "dog" ? "Dog" : "Cat"}
-                            </Card.Subtitle>
-                            <Card.Text>
-                                <strong>Expectativa de vida:</strong>{" "}
-                                {pet.life_span || "Not informed"} <br />
-                                <strong>Descrição:</strong>{" "}
-                                {cachedDescriptions.find((d) => d.id === pet.id)?.description}
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+            <div className={styles.cardsContainer}>
+                {searchResults.map((pet, idx) => (
+                    <Card
+                        key={pet.id || idx}
+                        image={getImageUrl(pet)}
+                        title={pet.name}
+                        subtitle={pet.breed_group || pet.origin}
+                        description={
+                            pet.description
+                                ? pet.description.length > 100
+                                    ? pet.description.slice(0, 100) + "..."
+                                    : pet.description
+                                : ""
+                        }
+                        lifeSpan={pet.life_span}
+                        species={species}
+                    />
                 ))}
             </div>
         </div>
