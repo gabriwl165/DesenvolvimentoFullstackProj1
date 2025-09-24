@@ -1,11 +1,15 @@
 import Banner from "../Banner/Banner.jsx";
-import "swiper/css/bundle";
+import Footer from "../Footer/Footer.jsx";
 
 function Home() {
 
     return (
-        <Banner/>
+        <div className="homeMain">
+            <Banner/>
+            <Footer/>
+        </div>
     )
+    
 }
 
 

@@ -1,0 +1,19 @@
+.footer{
+    width: 100%;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    text-align: left;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    font-family: "Alex Brush", cursive;
+}
+.rights{
+    text-align: left;
+    vertical-align: bottom;
+    padding-left: 1rem;
+    font-family: "Alex Brush", cursive;
+}
