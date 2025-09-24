@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchPets.module.css";
 import Card from "../Card/Card.jsx";
-
 
 function SearchPets() {
     const [species, setSpecies] = useState("dog");
@@ -12,28 +11,19 @@ function SearchPets() {
     const [popupMessage, setPopupMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
 
-    const cachedDescriptions = useMemo(() => {
-        return searchResults.map((pet) => ({
-            id: pet.id,
-            description: pet.temperament || "No description.",
-        }));
-    }, [searchResults]);
-
     const handleSearch = async () => {
         setPopupMessage("");
-        if (!searchValue) {
-            setPopupMessage("Type a breed!");
-            setShowPopup(true);
-            setSearchResults([]);
-            return;
-        }
 
         try {
             let url = "";
             if (species === "dog") {
-                url = `https://api.thedogapi.com/v1/breeds/search?q=${searchValue}`;
+                url = searchValue
+                    ? `https://api.thedogapi.com/v1/breeds/search?q=${searchValue}`
+                    : `https://api.thedogapi.com/v1/breeds`;
             } else if (species === "cat") {
-                url = `https://api.thecatapi.com/v1/breeds/search?q=${searchValue}`;
+                url = searchValue
+                    ? `https://api.thecatapi.com/v1/breeds/search?q=${searchValue}`
+                    : `https://api.thecatapi.com/v1/breeds`;
             }
 
             const response = await fetch(url);
@@ -59,6 +49,11 @@ function SearchPets() {
         }
         return null;
     };
+
+    // 👉 Executa a busca assim que o componente montar
+    useEffect(() => {
+        handleSearch();
+    }, [species]); // se quiser que trocando Dog/Cat também atualize
 
     return (
         <div className="container mt-4">

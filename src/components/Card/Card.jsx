@@ -1,6 +1,13 @@
 import React from "react";
 import styles from "./Card.module.css";
 
+function capitalizeFirstLetter(str) {
+    if (typeof str !== 'string' || str.length === 0) {
+        return str;
+    }
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function Card({ image, title, subtitle, description, lifeSpan, species }) {
     return (
         <div className={styles.floatingCard}>
@@ -12,10 +19,10 @@ function Card({ image, title, subtitle, description, lifeSpan, species }) {
                 <h4 className={styles.cardSubtitle}>{subtitle}</h4>
                 <p className={styles.cardDescription}>{description}</p>
                 {lifeSpan && (
-                    <p className={styles.cardLifeSpan}><strong>Expectativa de vida:</strong> {lifeSpan}</p>
+                    <p className={styles.cardLifeSpan}><strong>Life Expectancy:</strong> {lifeSpan}</p>
                 )}
                 {species && (
-                    <span className={styles.cardSpecies}>{species}</span>
+                    <span className={styles.cardSpecies}>{capitalizeFirstLetter(species)}</span>
                 )}
             </div>
         </div>
