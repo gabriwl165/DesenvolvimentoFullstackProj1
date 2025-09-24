@@ -1,18 +1,26 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import { FaGithub } from "react-icons/fa";
+
 
 function Footer() {
-
-    return(
+    return (
         <footer className={styles.footer}>
-            <div className={styles.mainContainer}>
-                <h2 className={styles.title}>PetCare Tips</h2>
-                <p className={styles.rights}>© 2024 PetCare Tips</p>
+            <div>
+                <div className={styles.title}>PetCare Tips</div>
+                <div className={styles.rights}>© 2024 PetCare Tips</div>
             </div>
             <div className={styles.contactContainer}>
-                <h2 className={styles.contact}> Bruna Naian </h2>
-                <h2 className={styles.contact}> Vinicius Neia </h2>
-                
+                <div className={styles.contact}>
+                    <div className={styles.contact}>
+                    <a href="https://github.com/Bnorbis" target="_blank" rel="noopener noreferrer">
+                        Bruna Naian <FaGithub />
+                    </a>
+                </div>
+                    <a href="https://github.com/ViniciusNeia" target="_blank" rel="noopener noreferrer">
+                        Vinicius Neia <FaGithub />
+                    </a>
+                </div>
             </div>
         </footer>
     );
