@@ -1,8 +1,8 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchPets.module.css";
 import Card from "../Card/Card.jsx";
+import CardExpended from "../CardExpended/CardExpended.jsx";
 
 function SearchPets() {
     const [species, setSpecies] = useState("dog");
@@ -10,31 +10,32 @@ function SearchPets() {
     const [searchResults, setSearchResults] = useState([]);
     const [popupMessage, setPopupMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
+    const [selectedPet, setSelectedPet] = useState(null); 
 
-    const handleSearch = async () => {
+    const debounceTimeout = useRef();
+
+    const handleSearch = async (value = searchValue, specie = species) => {
         setPopupMessage("");
-
         try {
             let url = "";
-            if (species === "dog") {
-                url = searchValue
-                    ? `https://api.thedogapi.com/v1/breeds/search?q=${searchValue}`
+            if (specie === "dog") {
+                url = value
+                    ? `https://api.thedogapi.com/v1/breeds/search?q=${value}`
                     : `https://api.thedogapi.com/v1/breeds`;
-            } else if (species === "cat") {
-                url = searchValue
-                    ? `https://api.thecatapi.com/v1/breeds/search?q=${searchValue}`
+            } else if (specie === "cat") {
+                url = value
+                    ? `https://api.thecatapi.com/v1/breeds/search?q=${value}`
                     : `https://api.thecatapi.com/v1/breeds`;
             }
-
             const response = await fetch(url);
             const data = await response.json();
-
             if (!data || data.length === 0) {
                 setPopupMessage("No results were found. Try again!");
                 setShowPopup(true);
                 setSearchResults([]);
             } else {
                 setSearchResults(data);
+                setShowPopup(false);
             }
         } catch (error) {
             setPopupMessage("Error when finding. Try again!");
@@ -50,10 +51,13 @@ function SearchPets() {
         return null;
     };
 
-    // 👉 Executa a busca assim que o componente montar
     useEffect(() => {
-        handleSearch();
-    }, [species]); // se quiser que trocando Dog/Cat também atualize
+        if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+        debounceTimeout.current = setTimeout(() => {
+            handleSearch(searchValue, species);
+        }, 500);
+        return () => clearTimeout(debounceTimeout.current);
+    }, [searchValue, species]);
 
     return (
         <div className="container mt-4">
@@ -76,9 +80,6 @@ function SearchPets() {
                     <option value="dog">Dog</option>
                     <option value="cat">Cat</option>
                 </select>
-                <Button variant="primary" size="sm" onClick={handleSearch}>
-                    Buscar
-                </Button>
             </div>
 
             {showPopup && (
@@ -99,9 +100,20 @@ function SearchPets() {
                         weight={pet.weight}
                         height={pet.height}
                         species={species}
+                        onClick={() => setSelectedPet(pet)}
                     />
                 ))}
             </div>
+
+            {selectedPet && (
+                <CardExpended
+                    pet={selectedPet}
+                    image={getImageUrl(selectedPet)}
+                    onClose={() => setSelectedPet(null)}
+                    species={species}
+                    description={selectedPet.description}
+                />
+            )}
         </div>
     );
 }

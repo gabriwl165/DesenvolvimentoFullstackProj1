@@ -19,9 +19,10 @@ function Card({
                   weight,         // { imperial, metric }
                   height,         // { imperial, metric }
                   species,
+                  onClick
               }) {
     return (
-        <div className={styles.floatingCard}>
+        <div className={styles.floatingCard} onClick={onClick} style={{ cursor: onClick ? "pointer" : "default" }}>
             {image && (
                 <img className={styles.cardImage} src={image} alt={title} />
             )}

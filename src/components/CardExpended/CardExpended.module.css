@@ -1,0 +1,104 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.55);
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.expandedCard {
+	background: #fff;
+	border-radius: 1.5rem;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+	max-width: 420px;
+	width: 95vw;
+	max-height: 90vh;
+	overflow-y: auto;
+	position: relative;
+	padding-bottom: 2rem;
+	animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: scale(0.97); }
+	to { opacity: 1; transform: scale(1); }
+}
+
+.closeButton {
+	position: absolute;
+	top: 16px;
+	right: 20px;
+	background: none;
+	border: none;
+	font-size: 2rem;
+	color: #333;
+	cursor: pointer;
+	z-index: 2;
+	transition: color 0.2s;
+}
+.closeButton:hover {
+	color: #ffb347;
+}
+
+.cardImage {
+	width: 100%;
+	height: 220px;
+	object-fit: cover;
+	border-top-left-radius: 1.5rem;
+	border-top-right-radius: 1.5rem;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.cardBody {
+	padding: 1.5rem 1.2rem 0.5rem 1.2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 90%;
+}
+.cardTitle {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 0.2rem;
+	color: #1a2327;
+	font-family: 'Montserrat', sans-serif;
+}
+.cardSubtitle {
+	font-size: 1.1rem;
+	color: #ffb347;
+	margin-bottom: 0.5rem;
+	font-family: 'Montserrat', sans-serif;
+}
+.cardDescription, .cardTemperament, .cardOrigin, .cardLifeSpan, .cardWeight, .cardHeight , .cardFullDescription{
+	font-size: 1rem;
+	color: #222;
+	margin-bottom: 0.5rem;
+	font-family: 'Montserrat', sans-serif;
+}
+.cardSpecies {
+	display: inline-block;
+	background: #ffb347;
+	color: #fff;
+	font-size: 0.95rem;
+	font-weight: 600;
+	padding: 0.25rem 0.7rem;
+	border-radius: 1rem;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+	letter-spacing: 1px;
+	margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+	.expandedCard {
+		max-width: 98vw;
+		padding: 0 0 2rem 0;
+	}
+	.cardBody {
+		padding: 1rem 0.5rem 0.5rem 0.5rem;
+	}
+}
