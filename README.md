@@ -21,6 +21,18 @@ O objetivo é fornecer dicas básicas de cuidados, expectativa de vida e informa
 - [React-Bootstrap](https://react-bootstrap.github.io/)
 - [The Dog API](https://thedogapi.com/) / [The Cat API](https://thecatapi.com/)
 
+## Imagens da aplicação
+<img width="1116" height="635" alt="image" src="https://github.com/user-attachments/assets/c50dca52-3775-4dac-aa3b-d97e0485d018" />
+<img width="1145" height="636" alt="image" src="https://github.com/user-attachments/assets/b3430396-4eb2-4897-9058-03c4cde99389" />
+<img width="1121" height="640" alt="image" src="https://github.com/user-attachments/assets/39241744-b0fc-4fb6-bdf2-de0f0d927464" />
+<img width="1142" height="648" alt="image" src="https://github.com/user-attachments/assets/2cccf59f-e074-4b32-9669-dfda54affa7d" />
+
+## Por que PetCare Tips?
+Os desenvolvedores do projeto são Bruna Naian e Vinicius Neia.
+Bruna é apaixonada por raças caninas e felinas e por suas funções. Estuda cinofilia por hobby há mais de 10 anos e já cursou Medicina Veterinária. Movida pelo desejo de unir conhecimento e inovação, busca revolucionar o mercado pet por meio da tecnologia.
+Ao seu lado está Vinicius, grande amigo e incentivador, que acompanha de perto seus estudos cinófilos e compartilha desse propósito.
+Juntos, eles criaram este projeto com a missão de, de forma simples e acessível, espalhar e compartilhar informações sobre a cinofilia, uma ciência tão fascinante e ainda pouco conhecida.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
