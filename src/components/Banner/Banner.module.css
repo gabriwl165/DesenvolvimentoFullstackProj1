@@ -38,13 +38,13 @@
     color: white;
     z-index: 2;
     font-family: "Alex Brush", cursive;
-    font-size: 60px;
+    font-size: clamp(24px, 6vw, 60px);
 }
 
 .secondText {
     color: white;
     z-index: 2;
     font-family: "Alex Brush", cursive;
-    font-size: 30px;
+    font-size: clamp(16px, 4vw, 30px);
 
 }
