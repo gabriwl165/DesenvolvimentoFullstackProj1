@@ -10,14 +10,14 @@ function capitalizeFirstLetter(str) {
 
 function Card({
                   image,
-                  title,          // name
-                  subtitle,       // breed_group
-                  description,    // bred_for
+                  title,
+                  subtitle,
+                  description,
                   temperament,
-                  lifeSpan,       // life_span
+                  lifeSpan,
                   origin,
-                  weight,         // { imperial, metric }
-                  height,         // { imperial, metric }
+                  weight,
+                  height,
                   species,
                   onClick
               }) {
