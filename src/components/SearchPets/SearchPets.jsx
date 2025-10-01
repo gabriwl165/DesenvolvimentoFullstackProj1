@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchPets.module.css";
 import Card from "../Card/Card.jsx";
-import CardExpended from "../CardExpended/CardExpended.jsx";
+import CardExpanded from "../CardExpanded/CardExpanded.jsx";
 
 function SearchPets() {
     const [species, setSpecies] = useState("dog");
@@ -106,7 +106,7 @@ function SearchPets() {
             </div>
 
             {selectedPet && (
-                <CardExpended
+                <CardExpanded
                     pet={selectedPet}
                     image={getImageUrl(selectedPet)}
                     onClose={() => setSelectedPet(null)}

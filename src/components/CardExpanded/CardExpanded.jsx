@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./CardExpended.module.css";
+import styles from "./CardExpanded.module.css";
 
-function CardExpended({ pet, image, onClose, species }) {
+function CardExpanded({ pet, image, onClose, species }) {
     if (!pet) return null;
     return (
         <div className={styles.overlay}>
@@ -43,4 +43,4 @@ function CardExpended({ pet, image, onClose, species }) {
     );
 }
 
-export default CardExpended;
+export default CardExpanded;
