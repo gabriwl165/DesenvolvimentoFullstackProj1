@@ -13,10 +13,10 @@ function Footer() {
             <div className={styles.contactContainer}>
                 <div className={styles.contact}>
                     <div className={styles.contact}>
-                    <a href="https://github.com/Bnorbis" target="_blank" rel="noopener noreferrer">
-                        Bruna Naian <FaGithub />
-                    </a>
-                </div>
+                        <a href="https://github.com/Bnorbis" target="_blank" rel="noopener noreferrer">
+                            Bruna Naian <FaGithub />
+                        </a>
+                    </div>
                     <a href="https://github.com/ViniciusNeia" target="_blank" rel="noopener noreferrer">
                         Vinicius Neia <FaGithub />
                     </a>

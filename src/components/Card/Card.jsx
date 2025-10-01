@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Card.module.css";
+import { usePetContext } from "../../contexts/PetContext";
 
 function capitalizeFirstLetter(str) {
     if (typeof str !== "string" || str.length === 0) {
@@ -19,10 +20,17 @@ function Card({
                   weight,
                   height,
                   species,
-                  onClick
+                  pet
               }) {
+    const { setSelectedPet } = usePetContext();
+
+    const handleClick = () => {
+        if (pet) {
+            setSelectedPet(pet);
+        }
+    };
     return (
-        <div className={styles.floatingCard} onClick={onClick} style={{ cursor: onClick ? "pointer" : "default" }}>
+        <div className={styles.floatingCard} onClick={handleClick} style={{ cursor: pet ? "pointer" : "default" }}>
             {image && (
                 <img className={styles.cardImage} src={image} alt={title} />
             )}

@@ -1,0 +1,151 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.title {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.message {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.okButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.okButton:hover {
+    background-color: #0056b3;
+}
+
+.info {
+    border-left: 4px solid #007bff;
+}
+
+.info .title {
+    color: #007bff;
+}
+
+.warning {
+    border-left: 4px solid #ffc107;
+}
+
+.warning .title {
+    color: #e6a700;
+}
+
+.error {
+    border-left: 4px solid #dc3545;
+}
+
+.error .title {
+    color: #dc3545;
+}
+
+.success {
+    border-left: 4px solid #28a745;
+}
+
+.success .title {
+    color: #28a745;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .popup {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+}

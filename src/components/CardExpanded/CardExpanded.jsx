@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./CardExpanded.module.css";
+import { usePetContext } from "../../contexts/PetContext";
 
-function CardExpanded({ pet, image, onClose, species }) {
+function CardExpanded() {
+    const { selectedPet, setSelectedPet, getImageUrl, species } = usePetContext();
+
+    const pet = selectedPet;
+    const image = getImageUrl(pet);
+    const onClose = () => setSelectedPet(null);
     if (!pet) return null;
     return (
         <div className={styles.overlay}>

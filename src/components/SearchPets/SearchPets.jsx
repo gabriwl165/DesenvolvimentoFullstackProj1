@@ -1,63 +1,19 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React from "react";
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchPets.module.css";
 import Card from "../Card/Card.jsx";
 import CardExpanded from "../CardExpanded/CardExpanded.jsx";
+import { usePetContext } from "../../contexts/PetContext";
 
 function SearchPets() {
-    const [species, setSpecies] = useState("dog");
-    const [searchValue, setSearchValue] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-    const [popupMessage, setPopupMessage] = useState("");
-    const [showPopup, setShowPopup] = useState(false);
-    const [selectedPet, setSelectedPet] = useState(null); 
-
-    const debounceTimeout = useRef();
-
-    const handleSearch = async (value = searchValue, specie = species) => {
-        setPopupMessage("");
-        try {
-            let url = "";
-            if (specie === "dog") {
-                url = value
-                    ? `https://api.thedogapi.com/v1/breeds/search?q=${value}`
-                    : `https://api.thedogapi.com/v1/breeds`;
-            } else if (specie === "cat") {
-                url = value
-                    ? `https://api.thecatapi.com/v1/breeds/search?q=${value}`
-                    : `https://api.thecatapi.com/v1/breeds`;
-            }
-            const response = await fetch(url);
-            const data = await response.json();
-            if (!data || data.length === 0) {
-                setPopupMessage("No results were found. Try again!");
-                setShowPopup(true);
-                setSearchResults([]);
-            } else {
-                setSearchResults(data);
-                setShowPopup(false);
-            }
-        } catch (error) {
-            setPopupMessage("Error when finding. Try again!");
-            setShowPopup(true);
-            setSearchResults([]);
-        }
-    };
-
-    const getImageUrl = (pet) => {
-        if (pet.reference_image_id) {
-            return `https://cdn2.the${species}api.com/images/${pet.reference_image_id}.jpg`;
-        }
-        return null;
-    };
-
-    useEffect(() => {
-        if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-        debounceTimeout.current = setTimeout(() => {
-            handleSearch(searchValue, species);
-        }, 500);
-        return () => clearTimeout(debounceTimeout.current);
-    }, [searchValue, species]);
+    const {
+        species,
+        searchValue,
+        processedSearchResults,
+        selectedPet,
+        setSpecies,
+        setSearchValue
+    } = usePetContext();
 
     return (
         <div className="container mt-4">
@@ -82,16 +38,13 @@ function SearchPets() {
                 </select>
             </div>
 
-            {showPopup && (
-                <div className="alert alert-warning mt-2">{popupMessage}</div>
-            )}
 
             <div className={styles.cardsContainer}>
-                {searchResults.map((pet, idx) => (
+                {processedSearchResults.map((pet, idx) => (
                     <Card
                         key={pet.id || idx}
-                        image={getImageUrl(pet)}
-                        title={pet.name}
+                        image={pet.imageUrl}
+                        title={pet.displayName}
                         subtitle={pet.breed_group}
                         description={pet.bred_for}
                         temperament={pet.temperament}
@@ -100,20 +53,12 @@ function SearchPets() {
                         weight={pet.weight}
                         height={pet.height}
                         species={species}
-                        onClick={() => setSelectedPet(pet)}
+                        pet={pet}
                     />
                 ))}
             </div>
 
-            {selectedPet && (
-                <CardExpanded
-                    pet={selectedPet}
-                    image={getImageUrl(selectedPet)}
-                    onClose={() => setSelectedPet(null)}
-                    species={species}
-                    description={selectedPet.description}
-                />
-            )}
+            {selectedPet && <CardExpanded />}
         </div>
     );
 }
